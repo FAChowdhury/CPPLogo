@@ -15,7 +15,7 @@ void setPixel(std::vector<uint8_t>& image, int width, int x, int y, uint8_t r, u
 }
 
 // Bresenham's Line Drawing Algorithm (with floating-point inputs for the angle)  (public in image class)
-std::pair<int, int> drawLine(std::vector<uint8_t>& image, int width, int height, int x0, int y0, double angle, int length, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
+std::pair<int, int> drawLine(std::vector<uint8_t>& image, int width, int height, int x0, int y0, int angle, int length, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
     // Convert angle from degrees to radians
     double rad = ((angle - 90.0) * M_PI) / 180.0;
 
@@ -63,7 +63,7 @@ int main() {
 
     // Starting point (x, y), angle, length of the line, and color (RGBA)
     int x0 = 100, y0 = 100;
-    double angle = 45;  // Angle in degrees
+    int angle = 45;  // Angle in degrees
     int length = 50;
     uint8_t r = 0, g = 255, b = 0, a = 255; // Red color with full opacity
 
