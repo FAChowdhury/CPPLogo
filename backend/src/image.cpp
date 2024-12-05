@@ -36,6 +36,7 @@ namespace img {
         int sy = (y0 < y1) ? 1 : -1;
         int err = dx - dy;
 
+        // bresenham's line algorithm
         while (true) {
             set_pixel(x0, y0, colour);
 
