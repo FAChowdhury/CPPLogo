@@ -1,22 +1,35 @@
+#include <cmath>
+#include <fstream>
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include "lodepng.h"
-#include <cmath>
 #include "image.h"
 #include "utils.h"
+#include "result.h"
 
-int main() {
-    // create a blank black image
-    auto image = img::Image(200, 200);
+int main(int argc, char *argv[]) {
+    // ./CPPLogo <.txt logo file> <img output path> <width> <height>
+    if (argc != 5) {
+        std::cerr << "Usage: " << argv[0] << " <.txt logo file> <img output path> <width> <height>" << std::endl;
+        return 1;
+    }
 
-    // draw a square
-    auto green = graphics::Colour(0, 255, 0, 255);
-    auto end_point = image.draw_line(50, 50, 90, 100, green);
-    end_point = image.draw_line(end_point.x, end_point.y, 180, 100, green);
-    end_point = image.draw_line(end_point.x, end_point.y, 270, 100, green);
-    end_point = image.draw_line(end_point.x, end_point.y, 0, 100, green);
+    // convert <.txt logo file> to Lines
+    auto lines = file::txt_file_to_lines(argv[1]);
 
-    // save the image as png
-    image.save_png("green square");
+    if (lines.is_ok()) {
+        // print each line in <.txt logo file>
+        for (const auto &line : lines.unwrap()) {
+            for (const auto &word : line) {
+                std::cout << word << " ";
+            }
+            std::cout << std::endl;
+        }
+    } else if (lines.is_err()) {
+        std::cout << lines.unwrap_err() << std::endl;
+        return -1;
+    }
+    
     return 0;
 }

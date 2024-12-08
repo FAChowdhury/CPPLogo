@@ -58,15 +58,13 @@ namespace img {
         return {width_, height_};
     }
 
-    auto Image::save_png(const std::string &name) -> void {
-        unsigned error = lodepng::encode(name + ".png", image_, width_, height_);
-
+    auto Image::save_png(const std::string &path) -> std::optional<Error> {
+        unsigned error = lodepng::encode(path, image_, width_, height_);
+        auto opt = std::optional<Error>();
         if (error) {
-            std::cerr << "Error encoding PNG: " << lodepng_error_text(error) << std::endl;
-        } else {    
-            std::cout << "Image saved as " + name + ".png" << std::endl;
+            opt = std::string("Error encoding PNG: ") + lodepng_error_text(error) + "\n";
         }
 
-        return;
+        return opt;
     }
 } // namespace img

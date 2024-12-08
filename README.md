@@ -19,6 +19,15 @@ C++ implementation of a Logo interpreter.
         </ul>
     </li>
     <li>
-        <h4>Logo Turtle Class</h4>
+        <h4>Logo Turtle Class [DONE]</h4>
+    </li>
+    <li>
+        <h4>Create an enum for default colours like Colour::White for better usability.</h4>
+    </li>
+    <li>
+        <h4>Handle errors with a Result object</h4>
+    </li>
+    <li>
+        <h4>Ensure const correctness (for functions too)</h4>
     </li>
 </ol> 
