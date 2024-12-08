@@ -19,7 +19,7 @@ namespace util {
 } // namespace util
 
 namespace file {
-    auto txt_file_to_lines(const std::string &file_path) -> result::Result<Lines, std::string> {
+    auto txt_file_to_lines(const std::string &file_path) -> result::Result<Lines, Error> {
         // Open the file
         auto fp = std::string("../") + std::string(file_path);
         auto file = std::ifstream(fp);

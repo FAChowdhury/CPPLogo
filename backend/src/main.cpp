@@ -27,9 +27,9 @@ int main(int argc, char *argv[]) {
             std::cout << std::endl;
         }
     } else if (lines.is_err()) {
-        std::cout << lines.unwrap_err() << std::endl;
-        return -1;
+        std::cerr << lines.unwrap_err() << std::endl;
+        return 1;
     }
-    
+
     return 0;
 }
