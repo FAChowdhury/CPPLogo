@@ -14,6 +14,8 @@ namespace turtle {
         auto turn(int degrees) -> void;
         auto set_direction(int degrees) -> void;
         auto set_pen_colour(const graphics::Colour &colour) -> void;
+        auto set_pen_down() -> void;
+        auto set_pen_up() -> void;
      private:
         util::Point2D position_;
         bool is_pen_down_;

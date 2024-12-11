@@ -35,4 +35,11 @@ namespace turtle {
     auto Turtle::set_pen_colour(const graphics::Colour &colour) -> void {
         pen_colour_ = graphics::Colour(colour.r, colour.g, colour.b, colour.a);
     }
+
+    auto Turtle::set_pen_down() -> void {
+        is_pen_down_ = true;
+    }
+    auto Turtle::set_pen_up() -> void {
+        is_pen_down_ = false;
+    }
 } // namespace turtle

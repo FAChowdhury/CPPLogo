@@ -1,7 +1,8 @@
 #pragma once
 #include <variant>
 #include <string>
-#include "utils.h"
+#include <stdexcept>
+#include <types.h>
 
 namespace result {
    template<typename T, typename E>
@@ -26,5 +27,3 @@ namespace result {
       Status status_;
    };
 } // namespace result
-
-#include "result.cpp"

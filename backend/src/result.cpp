@@ -68,3 +68,5 @@ namespace result {
     }
 
 } // result
+
+template class result::Result<Lines, Error>;

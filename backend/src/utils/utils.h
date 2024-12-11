@@ -6,9 +6,11 @@
 #include <string>
 #include <cstdint>
 #include "result.h"
+#include "types.h"
 
-using Lines = std::vector<std::vector<std::string>>;
-using Error = std::string;
+namespace result {
+    template <typename T, typename E> class Result;
+}
 
 namespace graphics {
     struct Colour {

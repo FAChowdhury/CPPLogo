@@ -25,9 +25,21 @@ C++ implementation of a Logo interpreter.
         <h4>Create an enum for default colours like Colour::White for better usability.</h4>
     </li>
     <li>
-        <h4>Handle errors with a Result object</h4>
+        <h4>Handle errors with a Result object [DONE]</h4>
     </li>
     <li>
         <h4>Ensure const correctness (for functions too)</h4>
+    </li>
+    <li>
+        <h4>Implement catch2 Library for testing</h4>
+    </li>
+    <li>
+        <h4>Work on tokenizing, parsing and executing AST. [WIP for turtle control logo code]</h4>
+    </li>
+    <li>
+        <h4>Refactor and optimise (e.g. use smart pointers instead of copying strings)</h4>
+    </li>
+    <li>
+        <h4>Add testing</h4>
     </li>
 </ol> 
