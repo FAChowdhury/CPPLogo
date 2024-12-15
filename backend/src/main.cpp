@@ -7,7 +7,7 @@
 #include "image.h"
 #include "utils.h"
 #include "result.h"
-#include "tokenizer.h"
+#include "token.h"
 
 int main(int argc, char *argv[]) {
     // ./CPPLogo <.txt logo file> <img output path> <width> <height>
@@ -20,6 +20,10 @@ int main(int argc, char *argv[]) {
     // used to grab lines for error handling
     const auto lines = file::txt_file_to_lines(argv[1]); 
 
+    std::cout << "Logo File" << std::endl;
+    std::cout << "#####################" << std::endl;
+    std::cout << std::endl;
+
     if (lines.is_ok()) {
         // print each line in <.txt logo file>
         for (const auto &line : lines.unwrap()) {
@@ -28,12 +32,22 @@ int main(int argc, char *argv[]) {
             }
             std::cout << std::endl;
         }
+
+        std::cout << std::endl; 
+        std::cout << "Tokens" << std::endl;
+        std::cout << "#####################" << std::endl;
+        std::cout << std::endl; 
+
         auto tokenizer = token::Tokenizer(lines.unwrap());
         auto tokens = tokenizer.tokenize();
-
         for (const auto &token : tokens) {
             std::cout << token << std::endl;
         }
+
+        std::cout << std::endl; 
+        std::cout << "#####################" << std::endl;
+
+
     } else if (lines.is_err()) {
         std::cerr << lines.unwrap_err() << std::endl;
         return 1;
