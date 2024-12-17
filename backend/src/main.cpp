@@ -13,10 +13,7 @@ int main(int argc, char *argv[]) {
     auto image = img::Image(std::stoul(argv[3]), std::stoul(argv[4]));
     auto turtle = turtle::Turtle(image.get_dimensions());
 
-    std::cout << std::endl;
-    std::cout << "Logo File" << std::endl;
-    std::cout << "#####################" << std::endl;
-    std::cout << std::endl;
+    dbg::title("Logo File");
 
     if (lines.is_ok()) {
         // print each line in <.txt logo file>
@@ -27,10 +24,7 @@ int main(int argc, char *argv[]) {
             std::cout << std::endl;
         }
 
-        std::cout << std::endl; 
-        std::cout << "Tokens" << std::endl;
-        std::cout << "#####################" << std::endl;
-        std::cout << std::endl; 
+        dbg::title("Tokens");
 
         auto tokenizer = token::Tokenizer(lines.unwrap());
         auto tokens = tokenizer.tokenize();
@@ -38,11 +32,8 @@ int main(int argc, char *argv[]) {
             std::cout << token << std::endl;
         }
 
-        std::cout << std::endl; 
-        std::cout << "Abstract Syntax Tree" << std::endl;
-        std::cout << "#####################" << std::endl;
-        std::cout << std::endl; 
-
+        dbg::title("Abstract Syntax Tree");
+        
         // pass tokens into the parser
         auto parser = parse::Parser(tokens);
         auto ast = parser.parse();

@@ -52,3 +52,12 @@ namespace file {
         return result::Result<Lines, std::string>::Ok(lines);
     }
 } // namespace file
+
+namespace dbg {
+    auto title(const std::string &title) -> void {
+        std::cout << std::endl; 
+        std::cout << title << std::endl;
+        std::cout << "#####################" << std::endl;
+        std::cout << std::endl; 
+    }
+} // namespace dbg

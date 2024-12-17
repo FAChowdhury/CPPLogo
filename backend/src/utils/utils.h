@@ -37,3 +37,7 @@ namespace util {
 namespace file {
     auto txt_file_to_lines(const std::string &file_path) -> result::Result<Lines, Error>;
 } // namespace file
+
+namespace dbg {
+    auto title(const std::string &title) -> void;
+}; // namespace dbg
