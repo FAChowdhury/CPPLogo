@@ -9,7 +9,7 @@
 namespace parse {
     class Parser {
      public:
-        Parser(const std::vector<token::Token> &tokens);
+        Parser(std::vector<token::Token> &tokens);
 
         auto parse() -> result::Result<ast::AST, error::LogoError>;
      private:

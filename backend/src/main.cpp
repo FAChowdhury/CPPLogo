@@ -1,13 +1,4 @@
-#include <cmath>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include "lodepng.h"
-#include "image.h"
-#include "utils.h"
-#include "result.h"
-#include "token.h"
+#include "main.h"
 
 int main(int argc, char *argv[]) {
     // ./CPPLogo <.txt logo file> <img output path> <width> <height>
@@ -19,7 +10,10 @@ int main(int argc, char *argv[]) {
     // convert <.txt logo file> to Lines
     // used to grab lines for error handling
     const auto lines = file::txt_file_to_lines(argv[1]); 
+    auto image = img::Image(std::stoul(argv[3]), std::stoul(argv[4]));
+    auto turtle = turtle::Turtle(image.get_dimensions());
 
+    std::cout << std::endl;
     std::cout << "Logo File" << std::endl;
     std::cout << "#####################" << std::endl;
     std::cout << std::endl;
@@ -45,7 +39,21 @@ int main(int argc, char *argv[]) {
         }
 
         std::cout << std::endl; 
+        std::cout << "Abstract Syntax Tree" << std::endl;
         std::cout << "#####################" << std::endl;
+        std::cout << std::endl; 
+
+        // pass tokens into the parser
+        auto parser = parse::Parser(tokens);
+        auto ast = parser.parse();
+        if (ast.is_ok()) {
+            ast.unwrap().run_debug();
+        } else {
+            // std::cerr << ast.unwrap_err() << std::endl;
+            std::cerr << "LOGO ERROR: TODO" << std::endl;
+            return 1;
+        }
+        // parse the tokens into an AST
 
 
     } else if (lines.is_err()) {
