@@ -16,16 +16,6 @@ namespace ast {
         PenUpNode() = default;
         void execute(turtle::Turtle &turtle) const override;
         void debug() const override;
-
-        // void execute(turtle::Turtle &turtle) const override {
-        //     turtle.set_pen_up();
-        // }
-
-        // void debug() const override {
-        //     std::cout << "{" << std::endl;
-        //     std::cout << "  PenUpNode" << std::endl;
-        //     std::cout << "}" << std::endl;
-        // }
     };
 
     class PenDownNode : public ASTNode {
@@ -33,16 +23,6 @@ namespace ast {
         PenDownNode() = default;
         void execute(turtle::Turtle &turtle) const override;
         void debug() const override;
-        
-        // void execute(turtle::Turtle &turtle) const override {
-        //     turtle.set_pen_down();
-        // }
-
-        // void debug() const override {
-        //     std::cout << "{" << std::endl;
-        //     std::cout << "  PenDownNode" << std::endl;
-        //     std::cout << "}" << std::endl;
-        // }
     };
     
     class AST {
