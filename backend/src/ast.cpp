@@ -55,4 +55,20 @@ namespace ast {
         std::cout << "}," << std::endl;
     }
 
+    // BACKNODE
+    BackNode::BackNode(int distance)
+    : distance_(distance) {}
+
+    void BackNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+        turtle.go_back(distance_, image);
+    }
+
+    void BackNode::debug() const {
+        std::cout << "{" << std::endl;
+        std::cout << "  Back(" << distance_ << ")" << std::endl;
+        std::cout << "}," << std::endl;
+    }
+
+
+
 } // namespace ast

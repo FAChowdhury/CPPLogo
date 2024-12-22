@@ -51,4 +51,8 @@ namespace turtle {
             position_ = image.get_end_coordinates(position_.x, position_.y, direction_, distance);
         }
     }
+
+    auto Turtle::go_back(int distance, img::Image &image) -> void {
+        Turtle::go_forward(-distance, image);
+    }
 } // namespace turtle

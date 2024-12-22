@@ -34,6 +34,15 @@ namespace ast {
      private:
         int distance_;
     };
+
+    class BackNode : public ASTNode {
+     public:
+        BackNode(int distance);
+        void execute(turtle::Turtle &turtle, img::Image &image) const override;
+        void debug() const override;
+     private:
+        int distance_;
+    };
     
     class AST {
      public:

@@ -19,6 +19,7 @@ namespace turtle {
         auto set_pen_up() -> void;
 
         auto go_forward(int distance, img::Image &image) -> void;
+        auto go_back(int distance, img::Image &image) -> void;
      private:
         util::Point2D position_;
         bool is_pen_down_;
