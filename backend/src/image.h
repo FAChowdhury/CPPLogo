@@ -29,6 +29,7 @@ namespace img {
         Image(unsigned int w, unsigned int h);
 
         auto draw_line(int x0, int y0, int angle, int length, const graphics::Colour &colour) -> util::Point2D;
+        auto get_end_coordinates(int x0, int y0, int angle, int length) -> util::Point2D;
         auto get_dimensions() -> util::Dimension2D;
         auto save_png(const std::string &path) -> std::optional<Error>;
 

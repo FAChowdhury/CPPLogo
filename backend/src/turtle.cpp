@@ -39,7 +39,16 @@ namespace turtle {
     auto Turtle::set_pen_down() -> void {
         is_pen_down_ = true;
     }
+
     auto Turtle::set_pen_up() -> void {
         is_pen_down_ = false;
+    }
+
+    auto Turtle::go_forward(int distance, img::Image &image) -> void {
+        if (is_pen_down()) {
+            position_ = image.draw_line(position_.x, position_.y, direction_, distance, pen_colour_);
+        } else {
+            position_ = image.get_end_coordinates(position_.x, position_.y, direction_, distance);
+        }
     }
 } // namespace turtle

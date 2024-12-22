@@ -1,6 +1,7 @@
 #pragma once
 
 #include "utils.h"
+#include "image.h"
 
 namespace turtle {
     class Turtle {
@@ -16,6 +17,8 @@ namespace turtle {
         auto set_pen_colour(const graphics::Colour &colour) -> void;
         auto set_pen_down() -> void;
         auto set_pen_up() -> void;
+
+        auto go_forward(int distance, img::Image &image) -> void;
      private:
         util::Point2D position_;
         bool is_pen_down_;

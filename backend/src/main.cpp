@@ -39,6 +39,9 @@ int main(int argc, char *argv[]) {
         auto ast = parser.parse();
         if (ast.is_ok()) {
             ast.unwrap().run_debug();
+            ast.unwrap().run(turtle, image);
+            // save the image as png
+            image.save_png(argv[2]);
         } else {
             // std::cerr << ast.unwrap_err() << std::endl;
             std::cerr << "LOGO ERROR: TODO" << std::endl;

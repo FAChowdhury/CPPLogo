@@ -4,10 +4,10 @@ namespace ast {
     AST::AST(std::vector<std::unique_ptr<ast::ASTNode>> &&ast)
     : ast_(std::move(ast)) {}
 
-    auto AST::run(turtle::Turtle &turtle) -> void {
+    auto AST::run(turtle::Turtle &turtle, img::Image &image) -> void {
         int count = 0;
         for (const auto &node : ast_) {
-            node->execute(turtle);
+            node->execute(turtle, image);
         }
     }
 
@@ -20,7 +20,7 @@ namespace ast {
     }
 
     // PENUPNODE
-    void PenUpNode::execute(turtle::Turtle &turtle) const {
+    void PenUpNode::execute(turtle::Turtle &turtle, img::Image &image) const {
         turtle.set_pen_up();
     }
 
@@ -31,13 +31,27 @@ namespace ast {
     }
 
     // PENDOWNNODE
-    void PenDownNode::execute(turtle::Turtle &turtle) const {
+    void PenDownNode::execute(turtle::Turtle &turtle, img::Image &image) const {
         turtle.set_pen_down();
     }
 
     void PenDownNode::debug() const {
         std::cout << "{" << std::endl;
         std::cout << "  Pen Down" << std::endl;
+        std::cout << "}," << std::endl;
+    }
+
+    // FORWARDNODE
+    ForwardNode::ForwardNode(int distance) 
+    : distance_(distance) {}
+
+    void ForwardNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+        turtle.go_forward(distance_, image);
+    }
+
+    void ForwardNode::debug() const {
+        std::cout << "{" << std::endl;
+        std::cout << "  Forward(" << distance_ << ")" << std::endl;
         std::cout << "}," << std::endl;
     }
 

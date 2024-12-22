@@ -12,7 +12,7 @@ namespace img {
     }
 
     auto Image::set_pixel(int x, int y, const graphics::Colour &colour) -> void {
-        if (x >= 0 && x < width_ && y >= 0) { // Check if the pixel is within the image bounds
+        if (x >= 0 and x < width_ and y >= 0 and y < height_) { // Check if the pixel is within the image bounds
                 int idx = (y * width_ + x) * 4;
                 image_[idx] = colour.r;      // Red channel
                 image_[idx + 1] = colour.g;  // Green channel
@@ -22,12 +22,18 @@ namespace img {
     }
 
     auto Image::draw_line(int x0, int y0, int angle, int length, const graphics::Colour &colour) ->  util::Point2D {
+        if (length < 0) {
+            length = abs(length);
+            angle += 180;
+        }
+        std::cout << "drawing line from: (" << x0 << ", " << y0 << ")" << std::endl;
         // Convert angle from degrees to radians
         double rad = ((angle - 90.0) * M_PI) / 180.0;
 
         // Calculate the end point (x1, y1) based on length and angle
         int x1 = static_cast<int>(x0 + length * cos(rad));
         int y1 = static_cast<int>(y0 + length * sin(rad));
+        std::cout << "drawing line to: (" << x1 << ", " << y1 << ")" << std::endl;
 
         // Calculate differences
         int dx = abs(x1 - x0);
@@ -52,6 +58,22 @@ namespace img {
                 y0 += sy;
             }
         }
+    }
+
+    auto Image::get_end_coordinates(int x0, int y0, int angle, int length) -> util::Point2D {
+        if (length < 0) {
+            length = abs(length);
+            angle += 180;
+        }
+
+        // Convert angle from degrees to radians
+        double rad = ((angle - 90.0) * M_PI) / 180.0;
+
+        // Calculate the end point (x1, y1) based on length and angle
+        int x1 = static_cast<int>(x0 + length * cos(rad));
+        int y1 = static_cast<int>(y0 + length * sin(rad));
+
+        return {x1, y1};
     }
 
     auto Image::get_dimensions() -> util::Dimension2D {
