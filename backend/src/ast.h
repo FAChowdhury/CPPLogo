@@ -61,6 +61,15 @@ namespace ast {
      private:
         int distance_;
     };
+
+    class SetPenColorNode : public ASTNode {
+     public:
+        SetPenColorNode(graphics::Colour &colour);
+        void execute(turtle::Turtle &turtle, img::Image &image) const override;
+        void debug() const override;
+     private:
+        graphics::Colour colour_;
+    };
     
     class AST {
      public:

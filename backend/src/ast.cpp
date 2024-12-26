@@ -97,4 +97,18 @@ namespace ast {
         std::cout << "  Right(" << distance_ << ")" << std::endl;
         std::cout << "}," << std::endl;
     }
+
+    // SETPENCOLORNODE
+    SetPenColorNode::SetPenColorNode(graphics::Colour &colour)
+    : colour_(colour) {}
+
+    void SetPenColorNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+        turtle.set_pen_colour(colour_);
+    }
+
+    void SetPenColorNode::debug() const {
+        std::cout << "{" << std::endl;
+        std::cout << "  SetPenColour(" << static_cast<int>(colour_.r) << ", " << static_cast<int>(colour_.g) << ", " << static_cast<int>(colour_.b) << ", " << static_cast<int>(colour_.a) << ")" << std::endl;
+        std::cout << "}," << std::endl;
+    }
 } // namespace ast

@@ -52,6 +52,27 @@ namespace parse {
                     std::cerr << "ERROR on the following line number: " << tokens_[i].line_number << " and word number: " << tokens_[i].column_number << std::endl; 
                     std::exit(1); // todo: Return LogoError!
                 }
+            } else if (tokens_[i].type == token::TokenType::SETPENCOLOR) {
+                if (i + 4 < tokens_.size() 
+                    and tokens_[i+1].type == token::TokenType::NUMBER
+                    and tokens_[i+2].type == token::TokenType::NUMBER
+                    and tokens_[i+3].type == token::TokenType::NUMBER
+                    and tokens_[i+4].type == token::TokenType::NUMBER) {
+                        // todo: ensure that numbers are between 0 and 255 inclusive.
+                        if (std::stoi(tokens_[i+1].word) < 0 or std::stoi(tokens_[i+1].word) > 255
+                            or std::stoi(tokens_[i+2].word) < 0 or std::stoi(tokens_[i+2].word) > 255
+                            or std::stoi(tokens_[i+3].word) < 0 or std::stoi(tokens_[i+3].word) > 255
+                            or std::stoi(tokens_[i+4].word) < 0 or std::stoi(tokens_[i+4].word) > 255) {
+
+                            std::cerr << "ERROR on the following line number: " << tokens_[i].line_number << std::endl; 
+                            std::exit(1); // todo: Return LogoError!
+
+                        } else {
+                            auto pen_color = graphics::Colour(std::stoi(tokens_[i+1].word), std::stoi(tokens_[i+2].word), std::stoi(tokens_[i+3].word), std::stoi(tokens_[i+4].word));
+                            ast.push_back(std::make_unique<ast::SetPenColorNode>(pen_color));
+                            i += 5;
+                        }
+                    }
             } else {
                 std::cerr << "Did not implement: " << tokens_[i] << " in Parser::parse() yet!" << std::endl; 
                 std::exit(1); // todo: Return LogoError!
