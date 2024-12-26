@@ -20,6 +20,8 @@ namespace turtle {
 
         auto go_forward(int distance, img::Image &image) -> void;
         auto go_back(int distance, img::Image &image) -> void;
+        auto go_left(int distance, img::Image &image) -> void;
+        auto go_right(int distance, img::Image &image) -> void;
      private:
         util::Point2D position_;
         bool is_pen_down_;

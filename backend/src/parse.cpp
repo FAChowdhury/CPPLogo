@@ -36,7 +36,23 @@ namespace parse {
                     std::cerr << "ERROR on the following line number: " << tokens_[i].line_number << " and word number: " << tokens_[i].column_number << std::endl; 
                     std::exit(1); // todo: Return LogoError!
                 }
-            }else {
+            } else if (tokens_[i].type == token::TokenType::LEFT) {
+                if (i + 1 < tokens_.size() and tokens_[i+1].type == token::TokenType::NUMBER) {
+                    ast.push_back(std::make_unique<ast::LeftNode>(std::stoi(tokens_[i+1].word)));
+                    i += 2;
+                } else {
+                    std::cerr << "ERROR on the following line number: " << tokens_[i].line_number << " and word number: " << tokens_[i].column_number << std::endl; 
+                    std::exit(1); // todo: Return LogoError!
+                }
+            } else if (tokens_[i].type == token::TokenType::RIGHT) {
+                if (i + 1 < tokens_.size() and tokens_[i+1].type == token::TokenType::NUMBER) {
+                    ast.push_back(std::make_unique<ast::RightNode>(std::stoi(tokens_[i+1].word)));
+                    i += 2;
+                } else {
+                    std::cerr << "ERROR on the following line number: " << tokens_[i].line_number << " and word number: " << tokens_[i].column_number << std::endl; 
+                    std::exit(1); // todo: Return LogoError!
+                }
+            } else {
                 std::cerr << "Did not implement: " << tokens_[i] << " in Parser::parse() yet!" << std::endl; 
                 std::exit(1); // todo: Return LogoError!
             }

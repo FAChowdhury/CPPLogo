@@ -61,3 +61,13 @@ namespace dbg {
         std::cout << std::endl; 
     }
 } // namespace dbg
+
+namespace math {
+    auto positive_modulo(int a, int b) -> int {
+        int remainder = a % b;
+        if (remainder < 0) {
+            remainder += b;
+        }
+        return remainder;
+    }
+}

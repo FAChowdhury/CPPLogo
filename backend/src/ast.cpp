@@ -70,5 +70,31 @@ namespace ast {
     }
 
 
+    // LEFTNODE
+    LeftNode::LeftNode(int distance)
+    : distance_(distance) {};
 
+    void LeftNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+        turtle.go_left(distance_, image);
+    }
+
+    void LeftNode::debug() const {
+        std::cout << "{" << std::endl;
+        std::cout << "  Left(" << distance_ << ")" << std::endl;
+        std::cout << "}," << std::endl;
+    }
+
+    // RIGHTNODE
+    RightNode::RightNode(int distance)
+    : distance_(distance) {}
+
+    void RightNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+        turtle.go_right(distance_, image);
+    }
+
+    void RightNode::debug() const {
+        std::cout << "{" << std::endl;
+        std::cout << "  Right(" << distance_ << ")" << std::endl;
+        std::cout << "}," << std::endl;
+    }
 } // namespace ast

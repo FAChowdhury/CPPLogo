@@ -26,6 +26,7 @@ namespace img {
             length = abs(length);
             angle += 180;
         }
+        angle = math::positive_modulo(angle, 360);
         std::cout << "drawing line from: (" << x0 << ", " << y0 << ")" << std::endl;
         // Convert angle from degrees to radians
         double rad = ((angle - 90.0) * M_PI) / 180.0;
@@ -65,14 +66,14 @@ namespace img {
             length = abs(length);
             angle += 180;
         }
-
+        std::cout << "moving from: (" << x0 << ", " << y0 << ")" << std::endl;
         // Convert angle from degrees to radians
         double rad = ((angle - 90.0) * M_PI) / 180.0;
 
         // Calculate the end point (x1, y1) based on length and angle
         int x1 = static_cast<int>(x0 + length * cos(rad));
         int y1 = static_cast<int>(y0 + length * sin(rad));
-
+        std::cout << "moving to: (" << x1 << ", " << y1 << ")" << std::endl;
         return {x1, y1};
     }
 

@@ -41,3 +41,7 @@ namespace file {
 namespace dbg {
     auto title(const std::string &title) -> void;
 }; // namespace dbg
+
+namespace math {
+    auto positive_modulo(int a, int b) -> int;
+}

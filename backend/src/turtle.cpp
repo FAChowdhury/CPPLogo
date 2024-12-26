@@ -55,4 +55,16 @@ namespace turtle {
     auto Turtle::go_back(int distance, img::Image &image) -> void {
         Turtle::go_forward(-distance, image);
     }
+
+    auto Turtle::go_left(int distance, img::Image &image) -> void {
+        if (is_pen_down()) {
+            position_ = image.draw_line(position_.x, position_.y, direction_ - 90, distance, pen_colour_);
+        } else {
+            position_ = image.get_end_coordinates(position_.x, position_.y, direction_ - 90, distance);
+        }
+    }
+
+    auto Turtle::go_right(int distance, img::Image &image) -> void {
+        Turtle::go_left(-distance, image);
+    }
 } // namespace turtle
