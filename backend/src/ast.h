@@ -79,6 +79,15 @@ namespace ast {
 	 private:
 		int degrees_;
 	};
+
+    class SetHeadingNode : public ASTNode {
+     public:
+        SetHeadingNode(int degrees);
+        void execute(turtle::Turtle &turtle, img::Image &image) const override;
+        void debug() const override;
+     private:
+        int degrees_;
+    };
     
     class AST {
      public:

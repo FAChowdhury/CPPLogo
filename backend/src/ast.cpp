@@ -112,7 +112,7 @@ namespace ast {
         std::cout << "}," << std::endl;
     }
 
-     // TURNNODE
+    // TURNNODE
     TurnNode::TurnNode(int degrees) 
     : degrees_(degrees) {}
 
@@ -123,6 +123,20 @@ namespace ast {
     void TurnNode::debug() const {
         std::cout << "{" << std::endl;
         std::cout << "  Turn(" << degrees_ << ")" << std::endl;
+        std::cout << "}," << std::endl;
+    }
+
+    // SETHEADINGNODE
+    SetHeadingNode::SetHeadingNode(int degrees) 
+    : degrees_(degrees) {}
+
+    void SetHeadingNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+        turtle.set_direction(degrees_);
+    }
+
+    void SetHeadingNode::debug() const {
+        std::cout << "{" << std::endl;
+        std::cout << "  SetHeadingNode(" << degrees_ << ")" << std::endl;
         std::cout << "}," << std::endl;
     }
 } // namespace ast
