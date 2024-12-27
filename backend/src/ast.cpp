@@ -167,4 +167,16 @@ namespace ast {
         std::cout << "  SetY(" << y_ << ")" << std::endl;
         std::cout << "}," << std::endl;
     }
+
+    // FILLNODE
+    void FillNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+        turtle.fill(image);
+    }
+
+    void FillNode::debug() const {
+        std::cout << "{" << std::endl;
+        std::cout << "  FILL" << std::endl;
+        std::cout << "}," << std::endl;
+    }
+
 } // namespace ast

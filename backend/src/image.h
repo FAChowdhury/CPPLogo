@@ -30,12 +30,13 @@ namespace img {
 
         auto draw_line(int x0, int y0, int angle, int length, const graphics::Colour &colour) -> util::Point2D;
         auto get_end_coordinates(int x0, int y0, int angle, int length) -> util::Point2D;
+        auto flood_fill(int x, int y, graphics::Colour &old_colour, graphics::Colour &new_colour) -> void;
         auto get_dimensions() -> util::Dimension2D;
+        auto get_pixel_colour(int x, int y) -> std::optional<graphics::Colour>;
         auto save_png(const std::string &path) -> std::optional<Error>;
 
      private:
         auto set_pixel(int x, int y, const graphics::Colour &colour) -> void;
-
         unsigned int width_;
         unsigned int height_;
         std::vector<uint8_t> image_;

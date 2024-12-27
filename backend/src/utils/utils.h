@@ -16,6 +16,9 @@ namespace graphics {
     struct Colour {
         // Todo: add another constructor so people can pass a value from a colour enum like colour::BLUE
         Colour(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+        bool operator==(const Colour& other) const;
+        bool operator!=(const Colour& other) const;
+
         uint8_t r, g, b, a;
     };
 } // namespace graphics

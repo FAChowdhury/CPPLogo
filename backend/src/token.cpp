@@ -53,6 +53,8 @@ namespace token {
                         tokens.push_back(token::Token(token::TokenType::SETY, word, row + 1, col + 1));
                     } else if (word == "SETPENCOLOR") {
                         tokens.push_back(token::Token(token::TokenType::SETPENCOLOR, word, row + 1, col + 1));
+                    } else if (word == "FILL") {
+                        tokens.push_back(token::Token(token::TokenType::FILL, word, row + 1, col + 1));
                     } else {
                         tokens.push_back(token::Token(token::TokenType::INVALID, word, row + 1, col + 1));
                     }

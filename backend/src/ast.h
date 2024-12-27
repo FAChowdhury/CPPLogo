@@ -106,6 +106,13 @@ namespace ast {
      private:
         int y_;
     };
+
+    class FillNode : public ASTNode {
+     public:
+        FillNode() = default;
+        void execute(turtle::Turtle &turtle, img::Image &image) const override;
+        void debug() const override;
+    };
     
     class AST {
      public:

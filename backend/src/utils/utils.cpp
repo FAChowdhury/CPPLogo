@@ -6,6 +6,14 @@ namespace graphics {
     , g(green)
     , b(blue)
     , a(alpha) {}
+
+    auto Colour::operator==(const Colour& other) const -> bool {
+        return r == other.r && g == other.g && b == other.b && a == other.a;
+    }
+
+    auto Colour::operator!=(const Colour& other) const -> bool {
+        return !(*this == other);
+    }
 } // namespace graphics
 
 namespace util {

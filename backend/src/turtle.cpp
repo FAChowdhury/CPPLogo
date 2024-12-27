@@ -67,4 +67,11 @@ namespace turtle {
     auto Turtle::go_right(int distance, img::Image &image) -> void {
         Turtle::go_left(-distance, image);
     }
+
+    auto Turtle::fill(img::Image &image) -> void {
+        auto old_colour = image.get_pixel_colour(position_.x, position_.y);
+        if (old_colour.has_value()) {
+            image.flood_fill(position_.x, position_.y, old_colour.value(), pen_colour_);
+        }
+    }
 } // namespace turtle

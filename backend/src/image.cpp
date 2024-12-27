@@ -21,6 +21,15 @@ namespace img {
         }
     }
 
+    auto Image::get_pixel_colour(int x, int y) -> std::optional<graphics::Colour> {
+        if (x >= 0 and x < width_ and y >= 0 and y < height_) {
+            int idx = (y * width_ + x) * 4;
+            return graphics::Colour(image_[idx], image_[idx + 1], image_[idx + 2], image_[idx + 3]);
+        }
+
+        return std::nullopt;
+    }
+
     auto Image::draw_line(int x0, int y0, int angle, int length, const graphics::Colour &colour) ->  util::Point2D {
         if (length < 0) {
             length = abs(length);
@@ -75,6 +84,22 @@ namespace img {
         int y1 = static_cast<int>(y0 + length * sin(rad));
         std::cout << "moving to: (" << x1 << ", " << y1 << ")" << std::endl;
         return {x1, y1};
+    }
+
+    auto Image::flood_fill(int x, int y, graphics::Colour &old_colour, graphics::Colour &new_colour) -> void {
+        if (new_colour == old_colour) {
+            return;
+        }
+        
+        if (get_pixel_colour(x, y).has_value()) {
+            if (get_pixel_colour(x, y).value() == old_colour) {
+                set_pixel(x, y, new_colour);
+                flood_fill(x+1,y, old_colour, new_colour);
+                flood_fill(x,y+1,old_colour,new_colour);
+                flood_fill(x-1,y,old_colour,new_colour);
+                flood_fill(x,y-1,old_colour,new_colour);
+            }
+        }
     }
 
     auto Image::get_dimensions() -> util::Dimension2D {
