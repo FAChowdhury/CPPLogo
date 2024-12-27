@@ -111,4 +111,18 @@ namespace ast {
         std::cout << "  SetPenColour(" << static_cast<int>(colour_.r) << ", " << static_cast<int>(colour_.g) << ", " << static_cast<int>(colour_.b) << ", " << static_cast<int>(colour_.a) << ")" << std::endl;
         std::cout << "}," << std::endl;
     }
+
+     // TURNNODE
+    TurnNode::TurnNode(int degrees) 
+    : degrees_(degrees) {}
+
+    void TurnNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+        turtle.turn(degrees_);
+    }
+
+    void TurnNode::debug() const {
+        std::cout << "{" << std::endl;
+        std::cout << "  SetPenColour(" << degrees_ << ")" << std::endl;
+        std::cout << "}," << std::endl;
+    }
 } // namespace ast
