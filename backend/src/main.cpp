@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[]) {
     // ./CPPLogo <.txt logo file> <img output path> <width> <height>
-    // ./CPPLogo logo/1_04_turn_rel.txt ../image/output.png 200 200
+    // ./CPPLogo ../logo/1_04_turn_rel.txt ../image/output.png 200 200
     if (argc != 5) {
         std::cerr << "Usage: " << argv[0] << " <.txt logo file> <img output path> <width> <height>" << std::endl;
         return 1;

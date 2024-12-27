@@ -136,7 +136,35 @@ namespace ast {
 
     void SetHeadingNode::debug() const {
         std::cout << "{" << std::endl;
-        std::cout << "  SetHeadingNode(" << degrees_ << ")" << std::endl;
+        std::cout << "  SetHeading(" << degrees_ << ")" << std::endl;
+        std::cout << "}," << std::endl;
+    }
+
+    // SETXNODE
+    SetXNode::SetXNode(int x)
+    : x_(x) {}
+
+    void SetXNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+        turtle.set_x(x_);
+    }
+
+    void SetXNode::debug() const {
+        std::cout << "{" << std::endl;
+        std::cout << "  SetX(" << x_ << ")" << std::endl;
+        std::cout << "}," << std::endl;
+    }
+
+    // SETYNODE
+    SetYNode::SetYNode(int y)
+    : y_(y) {}
+
+    void SetYNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+        turtle.set_y(y_);
+    }
+
+    void SetYNode::debug() const {
+        std::cout << "{" << std::endl;
+        std::cout << "  SetY(" << y_ << ")" << std::endl;
         std::cout << "}," << std::endl;
     }
 } // namespace ast

@@ -88,6 +88,24 @@ namespace ast {
      private:
         int degrees_;
     };
+
+    class SetXNode : public ASTNode {
+     public:
+        SetXNode(int x);
+        void execute(turtle::Turtle &turtle, img::Image &image) const override;
+        void debug() const override;
+     private:
+        int x_;
+    };
+
+    class SetYNode : public ASTNode {
+     public:
+        SetYNode(int y);
+        void execute(turtle::Turtle &turtle, img::Image &image) const override;
+        void debug() const override;
+     private:
+        int y_;
+    };
     
     class AST {
      public:
