@@ -122,7 +122,7 @@ namespace ast {
 
     void TurnNode::debug() const {
         std::cout << "{" << std::endl;
-        std::cout << "  SetPenColour(" << degrees_ << ")" << std::endl;
+        std::cout << "  Turn(" << degrees_ << ")" << std::endl;
         std::cout << "}," << std::endl;
     }
 } // namespace ast
