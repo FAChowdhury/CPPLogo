@@ -2,17 +2,17 @@
 #include <string>
 
 namespace error {
-    enum class ErrorType { // add more when required
-        MISMATCHED_TYPE,
-        DIVISION_BY_ZERO,
-        TOO_MANY_ARGUMENTS,
+    enum class ErrorType {
+        TOO_FEW_ARGUMENTS,
+        UNEXPECTED_TYPE,
     };
-    class LogoError {
-     public:
-        friend std::ostream& operator<<(std::ostream& os, const LogoError& le);
-     private:
+
+    auto toString(ErrorType err) -> std::string;
+
+    struct LogoError {
+        LogoError(ErrorType type, const std::string &msg, int line_num, int col_num);
         ErrorType type_;
-        std::string path_;
+        const std::string msg_;
         int line_number_;
         int column_number_;
     };

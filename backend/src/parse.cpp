@@ -25,8 +25,16 @@ namespace parse {
                     ast.push_back(std::make_unique<ast::ForwardNode>(std::stoi(tokens_[i+1].word)));
                     i += 2;
                 } else {
-                    std::cerr << "ERROR on the following line number: " << tokens_[i].line_number << " and word number: " << tokens_[i].column_number << std::endl; 
-                    std::exit(1); // todo: Return LogoError!
+                    if (i + 1 >= tokens_.size()) {
+                        auto error = error::LogoError(error::ErrorType::TOO_FEW_ARGUMENTS, "Expected one integer argument in the form: \033[32mFORWARD <int>\033[0m", tokens_[i].line_number, tokens_[i].column_number);
+                        return result::Result<ast::AST, error::LogoError>::Err(error);
+                    } else if (tokens_[i+1].type != token::TokenType::NUMBER) {
+                        auto error = error::LogoError(error::ErrorType::UNEXPECTED_TYPE, "Expected one integer argument in the form: \033[32mFORWARD <int>\033[0m", tokens_[i].line_number, tokens_[i].column_number);
+                        return result::Result<ast::AST, error::LogoError>::Err(error);
+                    } else {
+                        std::cerr << "ERROR on the following line number: " << tokens_[i].line_number << " and word number: " << tokens_[i].column_number << std::endl; 
+                        std::exit(1); // todo: Return LogoError!
+                    }
                 }
             } else if (tokens_[i].type == token::TokenType::BACK) {
                 if (i + 1 < tokens_.size() and tokens_[i+1].type == token::TokenType::NUMBER) {
@@ -72,6 +80,9 @@ namespace parse {
                             ast.push_back(std::make_unique<ast::SetPenColorNode>(pen_color));
                             i += 5;
                         }
+                    } else {
+                        std::cerr << "ERROR on the following line number: " << tokens_[i].line_number << std::endl; 
+                        std::exit(1); // todo: Return LogoError!
                     }
             } else if (tokens_[i].type == token::TokenType::TURN) {
                 if (i + 1 < tokens_.size() and tokens_[i+1].type == token::TokenType::NUMBER) {

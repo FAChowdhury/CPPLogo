@@ -1,5 +1,15 @@
 #include "main.h"
 
+int countDigits(int number) {
+    // Handle the special case when the number is 0
+    if (number == 0) {
+        return 1;
+    }
+    
+    // For negative numbers, work with their absolute value
+    return static_cast<int>(floor(log10(abs(number)))) + 1;
+}
+
 int main(int argc, char *argv[]) {
     // ./CPPLogo <.txt logo file> <img output path> <width> <height>
     // ./CPPLogo ../logo/1_04_turn_rel.txt ../image/output.png 200 200
@@ -45,8 +55,58 @@ int main(int argc, char *argv[]) {
             image.save_png(argv[2]);
         } else {
             // std::cerr << ast.unwrap_err() << std::endl;
-            std::cerr << "LOGO ERROR: TODO" << std::endl;
-            return 1;
+            auto error = ast.unwrap_err();
+            // std::cerr << "LOGO ERROR: TODO" << std::endl;
+            // return 1;
+            // Output the formatted error message
+
+            // find the max num digits of line_number.
+            auto max = countDigits(error.line_number_);
+            // for line_numbers with digits less than max, add two spaces.
+            if (error.line_number_ < lines.unwrap().size()) {
+                max = countDigits(error.line_number_ + 1);
+            }
+
+            std::cerr << "\033[31mERROR\033[0m: " << error::toString(error.type_) << std::endl;
+            std::cerr << "--> " << argv[1] << " on line " << error.line_number_ << std::endl;
+
+            if (error.line_number_ - 2 > -1) {
+                std::cerr << error.line_number_ - 1;
+                if (countDigits(error.line_number_ - 1) < max) {
+                    std::cerr << "  | ";
+                } else {
+                    std::cerr << " | ";
+                }
+                for (int i = 0; i < lines.unwrap()[error.line_number_ - 2].size(); ++i) {
+                    std::cerr << lines.unwrap()[error.line_number_ - 2][i] << " ";
+                }
+                std::cerr << std::endl;
+            }
+
+            std::cerr << "\033[31m" << error.line_number_ <<  "\033[0m";
+            if (countDigits(error.line_number_) < max) {
+                std::cerr << "  | ";
+            } else {
+                std::cerr << " | ";
+            }
+            for (int i = 0; i < lines.unwrap()[error.line_number_ - 1].size(); ++i) {
+                if (i == error.column_number_ - 1) {
+                    std::cerr << "\033[31m";
+                    std::cerr << lines.unwrap()[error.line_number_ - 1][i] << " ";
+                    std::cerr << "\033[0m";
+                } else {
+                    std::cerr << lines.unwrap()[error.line_number_ - 1][i] << " ";
+                }
+            }
+            std::cerr << std::endl;
+            if (error.line_number_ < lines.unwrap().size()) {
+                std::cerr << error.line_number_ + 1 << " | ";
+                for (int i = 0; i < lines.unwrap()[error.line_number_].size(); ++i) {
+                    std::cerr << lines.unwrap()[error.line_number_][i] << " ";
+                }
+            std::cerr << std::endl;
+            }
+            std::cerr << error.msg_ << std::endl;
         }
         // parse the tokens into an AST
 
