@@ -78,4 +78,14 @@ namespace math {
         }
         return remainder;
     }
+
+    auto count_digits(int number) -> int {
+        // Handle the special case when the number is 0
+        if (number == 0) {
+            return 1;
+        }
+        
+        // For negative numbers, work with their absolute value
+        return static_cast<int>(floor(log10(abs(number)))) + 1;
+    }
 }

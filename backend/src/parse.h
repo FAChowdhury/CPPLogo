@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "ast.h"
-#include "error.h"
+#include "logo_error.h"
 #include "result.h"
 #include "token.h"
 
@@ -11,7 +11,7 @@ namespace parse {
      public:
         Parser(std::vector<token::Token> &tokens);
 
-        auto parse() -> result::Result<ast::AST, error::LogoError>;
+        auto parse() -> result::Result<ast::AST, logo_error::LogoError>;
      private:
         std::vector<token::Token> &tokens_;
     };

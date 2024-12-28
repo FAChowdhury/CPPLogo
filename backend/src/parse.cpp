@@ -4,7 +4,7 @@ namespace parse {
     Parser::Parser(std::vector<token::Token> &tokens)
     : tokens_(tokens) {}
 
-    auto Parser::parse() -> result::Result<ast::AST, error::LogoError> {
+    auto Parser::parse() -> result::Result<ast::AST, logo_error::LogoError> {
         auto ast = std::vector<std::unique_ptr<ast::ASTNode>>();
         // todo:
         // iterate over the tokens
@@ -26,11 +26,11 @@ namespace parse {
                     i += 2;
                 } else {
                     if (i + 1 >= tokens_.size()) {
-                        auto error = error::LogoError(error::ErrorType::TOO_FEW_ARGUMENTS, "Expected one integer argument in the form: \033[32mFORWARD <int>\033[0m", tokens_[i].line_number, tokens_[i].column_number);
-                        return result::Result<ast::AST, error::LogoError>::Err(error);
+                        auto error = logo_error::LogoError(logo_error::ErrorType::TOO_FEW_ARGUMENTS, "Expected one integer argument in the form: \033[32mFORWARD <int>\033[0m", tokens_[i].line_number, tokens_[i].column_number);
+                        return result::Result<ast::AST, logo_error::LogoError>::Err(error);
                     } else if (tokens_[i+1].type != token::TokenType::NUMBER) {
-                        auto error = error::LogoError(error::ErrorType::UNEXPECTED_TYPE, "Expected one integer argument in the form: \033[32mFORWARD <int>\033[0m", tokens_[i].line_number, tokens_[i].column_number);
-                        return result::Result<ast::AST, error::LogoError>::Err(error);
+                        auto error = logo_error::LogoError(logo_error::ErrorType::UNEXPECTED_TYPE, "Expected one integer argument in the form: \033[32mFORWARD <int>\033[0m", tokens_[i].line_number, tokens_[i].column_number);
+                        return result::Result<ast::AST, logo_error::LogoError>::Err(error);
                     } else {
                         std::cerr << "ERROR on the following line number: " << tokens_[i].line_number << " and word number: " << tokens_[i].column_number << std::endl; 
                         std::exit(1); // todo: Return LogoError!
@@ -124,6 +124,6 @@ namespace parse {
                 std::exit(1); // todo: Return LogoError!
             }
         }
-        return result::Result<ast::AST, error::LogoError>::Ok(ast::AST(std::move(ast)));
+        return result::Result<ast::AST, logo_error::LogoError>::Ok(ast::AST(std::move(ast)));
     }
 } // namespace parse

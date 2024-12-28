@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -47,4 +48,6 @@ namespace dbg {
 
 namespace math {
     auto positive_modulo(int a, int b) -> int;
+
+    auto count_digits(int number) -> int;
 }

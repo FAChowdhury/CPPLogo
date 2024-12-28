@@ -1,7 +1,10 @@
 #pragma once
 #include <string>
 
-namespace error {
+#include "utils.h"
+#include "result.h"
+
+namespace logo_error {
     enum class ErrorType {
         TOO_FEW_ARGUMENTS,
         UNEXPECTED_TYPE,
@@ -16,4 +19,6 @@ namespace error {
         int line_number_;
         int column_number_;
     };
+
+    auto print_logo_error(LogoError error, result::Result<Lines, Error> lines, const std::string path) -> void;
 } // namespace error

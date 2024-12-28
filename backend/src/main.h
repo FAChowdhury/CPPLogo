@@ -12,4 +12,4 @@
 #include "token.h"
 #include "parse.h"
 #include "turtle.h"
-#include "error.h"
+#include "logo_error.h"
