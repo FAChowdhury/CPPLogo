@@ -184,3 +184,6 @@ Error messages highlight the line that contains the error along with surrounding
 When arguments are not provided for a command, an error is raised:\
 ![image](https://github.com/user-attachments/assets/42180f25-5cac-4bb7-b6ba-e53565d055fd)
 
+```markdown
+<span style="color: red;">This is red text</span>
+```
