@@ -174,14 +174,7 @@ SETPENCOLOR "115 "187 "230 "300
 FILL
 ...
 ```
-Realise that we input a value above 255 for the alpha value, which is invalid. We get the following error:
-```cpp
-ERROR: Unexpected type.
---> ../logo/test.txt on line 4
-3 | // make background skyblue 
-4 | SETPENCOLOR "115 "187 "230 "300 
-5 | FILL 
-Expected 4 unsigned 8-bit integer arguments in the form: SETPENCOLOR "<uint8_t> "<uint8_t> "<uint8_t> "<uint8_t>
-```
+Realise that we input a value above 255 for the alpha value, which is invalid. We get the following error:\
+![image](https://github.com/user-attachments/assets/97f99fa6-4838-4caa-851b-0f85be889a0f)
 
 
