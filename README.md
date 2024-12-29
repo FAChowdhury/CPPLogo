@@ -85,3 +85,79 @@ The pen blinks to the coordinate (current x position, `location`) in the image. 
 FILL
 ```
 The pen flood fills the image starting from the current location with the current pen colour. This is comparable to the bucket fill tool in drawing software.
+
+<h2>Examples</h2>
+
+### 1. Drawings
+
+#### 1.1 Heart
+Let's draw a heart together.
+If you pass the following file as input, you will obtain the result below:
+```
+// draw a heart
+
+// make background skyblue
+SETPENCOLOR "115 "187 "230 "255
+FILL
+
+// right side
+PENDOWN
+SETPENCOLOR "245 "61 "116 "255
+SETY "60
+TURN "45
+FORWARD "28
+TURN "45
+FORWARD "20
+TURN "45
+FORWARD "28
+TURN "45
+FORWARD "20
+TURN "45
+FORWARD "85
+
+// left side
+SETHEADING "0
+SETX "100
+SETY "60
+TURN "-45
+FORWARD "28
+TURN "-45
+FORWARD "20
+TURN "-45
+FORWARD "28
+TURN "-45
+FORWARD "20
+TURN "-45
+FORWARD "85
+
+// make heart red
+PENUP
+SETX "100
+SETY "100
+FILL
+
+// Add highlights
+PENDOWN
+SETPENCOLOR "255 "255 "255 "255
+SETX "60
+SETY "60
+SETHEADING "90
+FORWARD "20
+TURN "90
+FORWARD "10
+TURN "90
+FORWARD "10
+TURN "-90
+FORWARD "10
+TURN "90
+FORWARD "10
+TURN "90
+FORWARD "20
+
+PENUP
+BACK "5
+RIGHT "5
+FILL
+```
+![image](https://github.com/user-attachments/assets/71bff86d-5349-41be-821e-111eb74bbb9d)
+
