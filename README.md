@@ -93,7 +93,9 @@ The pen flood fills the image starting from the current location with the curren
 #### 1.1 Heart
 Let's draw a heart together.
 To obtain the following picture of a heart:
-![image](https://github.com/user-attachments/assets/71bff86d-5349-41be-821e-111eb74bbb9d)
+
+<div>![image](https://github.com/user-attachments/assets/71bff86d-5349-41be-821e-111eb74bbb9d)</div>
+
 Write the following code:
 ```
 // draw a heart
