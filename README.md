@@ -175,7 +175,7 @@ FILL
 ...
 ```
 Realise that we input a value above 255 for the alpha value, which is invalid. We get the following error:
-```
+```cpp
 ERROR: Unexpected type.
 --> ../logo/test.txt on line 4
 3 | // make background skyblue 
@@ -183,3 +183,5 @@ ERROR: Unexpected type.
 5 | FILL 
 Expected 4 unsigned 8-bit integer arguments in the form: SETPENCOLOR "<uint8_t> "<uint8_t> "<uint8_t> "<uint8_t>
 ```
+
+
