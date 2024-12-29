@@ -177,6 +177,22 @@ FILL
 ...
 ```
 Realise that we input a value above 255 for the alpha value, which is invalid. We get the following error:\
+![image](https://github.com/user-attachments/assets/97f99fa6-4838-4caa-851b-0f85be889a0f)
+Error messages highlight the line that contains the error along with surrounding lines. It also highlights the specific word causing the error in red and offers a suitable solution format in green.
+In text:
+```
+ERROR: Unexpected type.
+--> ../logo/test.txt on line 4
+3 | // make background skyblue 
+4 | SETPENCOLOR "115 "187 "230 "300 
+5 | FILL 
+Expected 4 unsigned 8-bit integer arguments in the form: SETPENCOLOR "<uint8_t> "<uint8_t> "<uint8_t> "<uint8_t>
+```
+
+#### Error: Too Few Arguments
+When arguments are not provided for a command, an error is raised:\
+![image](https://github.com/user-attachments/assets/42180f25-5cac-4bb7-b6ba-e53565d055fd)
+In text:
 ```
 ERROR: Too few arguments.
 --> ../logo/test2.txt on line 16
@@ -184,9 +200,3 @@ ERROR: Too few arguments.
 16 | TURN 
 Expected one integer argument in the form: TURN "<int>
 ```
-![image](https://github.com/user-attachments/assets/97f99fa6-4838-4caa-851b-0f85be889a0f)
-Error messages highlight the line that contains the error along with surrounding lines. It also highlights the specific word causing the error in red and offers a suitable solution format in green.
-
-#### Error: Too Few Arguments
-When arguments are not provided for a command, an error is raised:\
-![image](https://github.com/user-attachments/assets/42180f25-5cac-4bb7-b6ba-e53565d055fd)
