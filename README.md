@@ -2,6 +2,8 @@
 <h2>Description</h2>
 <p>CPPLogo is an interpreter for a logo-like language built using C++. Logo is a language that allows a user to draw images using code. Hence, given a text file with logo-like code (for specifics, please see below), CPPLogo will interpret the code and output the appropriate image.</p>
 
+**This project is unfinished and a WIP! I plan to create a frontend that will contain a text editor to write logo-like code in order to produce images.**
+
 <h2>Documentation</h2>
 
 ### 1. Value Types
