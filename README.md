@@ -163,3 +163,23 @@ RIGHT "5
 FILL
 ```
 
+### Errors
+#### Error: Unexpected Type
+Suppose when drawing the heart, we write the following code instead:
+```
+// draw a heart
+
+// make background skyblue
+SETPENCOLOR "115 "187 "230 "300
+FILL
+...
+```
+Realise that we input a value above 255 for the alpha value, which is invalid. We get the following error:
+```
+ERROR: Unexpected type.
+--> ../logo/test.txt on line 4
+3 | // make background skyblue 
+4 | SETPENCOLOR "115 "187 "230 "300 
+5 | FILL 
+Expected 4 unsigned 8-bit integer arguments in the form: SETPENCOLOR "<uint8_t> "<uint8_t> "<uint8_t> "<uint8_t>
+```
