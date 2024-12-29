@@ -177,12 +177,14 @@ FILL
 ...
 ```
 Realise that we input a value above 255 for the alpha value, which is invalid. We get the following error:\
+ERROR: Too few arguments.
+--> ../logo/test2.txt on line 16
+15 | // ... 
+16 | TURN 
+Expected one integer argument in the form: TURN "<int>\
 ![image](https://github.com/user-attachments/assets/97f99fa6-4838-4caa-851b-0f85be889a0f)
 Error messages highlight the line that contains the error along with surrounding lines. It also highlights the specific word causing the error in red and offers a suitable solution format in green.
 
 #### Error: Too Few Arguments
 When arguments are not provided for a command, an error is raised:\
 ![image](https://github.com/user-attachments/assets/42180f25-5cac-4bb7-b6ba-e53565d055fd)
-
-```markdown
-<span style="color: red;">This is red text</span>
