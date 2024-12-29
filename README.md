@@ -17,3 +17,9 @@ Lifts the pen. This means that any movement of the pen will not draw anything to
 PENDOWN
 ```
 Places the pen down on the image. This means that as the pen moves, a line will be drawn onto the image with the current pen colour.
+
+#### 1.3 FORWARD
+```cpp
+FORWARD <numpixels:int>
+```
+The pen moves forward in the direction that it is currently facing for `numpixels` amount.
