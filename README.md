@@ -53,3 +53,21 @@ The pen colour is set to the colour corresponding to **rgba**(red, green, blue, 
 TURN <degrees:int>
 ```
 The pen turns `degrees` degrees clockwise relative to the direction they are currently facing. The pen initially faces true north which corresponds to 0 degrees.
+
+#### 1.9 SETHEADING
+```cpp
+SETHEADING <degrees:int>
+```
+The pen faces in the direction of `degrees` relative to true north.
+
+#### 1.10 SETX
+```cpp
+SETX <location:int>
+```
+The pen blinks to the coordinate (`location`, current y position) in the image. Top left corner of the image is denoted as (0, 0).
+
+#### 1.11 SETY
+```cpp
+SETY <location:int>
+```
+The pen blinks to the coordinate (current x position, `location`) in the image. Top left corner of the image is denoted as (0, 0).
