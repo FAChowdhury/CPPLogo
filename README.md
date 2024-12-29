@@ -47,3 +47,9 @@ The pen moves right with respect to the direction that it is currently facing fo
 SETPENCOLOR <red:uint8_t> <green:uint8_t> <blue:uint8_t> <alpha:uint8_t>
 ```
 The pen colour is set to the colour corresponding to **rgba**(red, green, blue, alpha).
+
+#### 1.8 TURN
+```cpp
+TURN <degrees:int>
+```
+The pen turns `degrees` degrees clockwise relative to the direction they are currently facing. The pen initially faces true north which corresponds to 0 degrees.
