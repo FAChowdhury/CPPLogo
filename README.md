@@ -71,3 +71,9 @@ The pen blinks to the coordinate (`location`, current y position) in the image. 
 SETY <location:int>
 ```
 The pen blinks to the coordinate (current x position, `location`) in the image. Top left corner of the image is denoted as (0, 0).
+
+#### 1.12 FILL
+```cpp
+FILL
+```
+The pen flood fills the image starting from the current location with the current pen colour. This is comparable to the bucket fill tool in drawing software.
