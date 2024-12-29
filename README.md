@@ -191,7 +191,7 @@ Expected 4 unsigned 8-bit integer arguments in the form: SETPENCOLOR "<uint8_t> 
 
 #### Error: Too Few Arguments
 When arguments are not provided for a command, an error is raised:\
-![image](https://github.com/user-attachments/assets/42180f25-5cac-4bb7-b6ba-e53565d055fd)
+![image](https://github.com/user-attachments/assets/42180f25-5cac-4bb7-b6ba-e53565d055fd)\
 In text:
 ```
 ERROR: Too few arguments.
