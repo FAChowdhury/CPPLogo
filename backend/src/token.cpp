@@ -29,6 +29,8 @@ namespace token {
                     const auto var = lines_[row][col].substr(1);
                     if (is_number(var)) {
                         tokens.push_back(token::Token(token::TokenType::NUMBER, var, row + 1, col + 1));
+                    } else {
+                        tokens.push_back(token::Token(token::TokenType::STRING, var, row + 1, col + 1));
                     } // add more as we think about MAKE assignments. (e.g. string type for '\"' thats not a number)
                 } else { // command
                     if (word == "PENUP") {

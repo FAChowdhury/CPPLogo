@@ -11,6 +11,7 @@ namespace logo_error {
         switch (err) {
             case ErrorType::TOO_FEW_ARGUMENTS: {return "Too few arguments.";}
             case ErrorType::UNEXPECTED_TYPE: {return "Unexpected type.";}
+            case ErrorType::UNEXPECTED_COMMAND: {return "Unexpected command.";}
             default: return "Unknown";
         }
     }

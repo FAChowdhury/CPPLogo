@@ -19,6 +19,7 @@ namespace token {
         SETY,
         NUMBER,
         FILL,
+        STRING,
         INVALID,
     };
 

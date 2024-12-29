@@ -8,6 +8,7 @@ namespace logo_error {
     enum class ErrorType {
         TOO_FEW_ARGUMENTS,
         UNEXPECTED_TYPE,
+        UNEXPECTED_COMMAND,
     };
 
     auto toString(ErrorType err) -> std::string;
