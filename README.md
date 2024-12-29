@@ -186,4 +186,3 @@ When arguments are not provided for a command, an error is raised:\
 
 ```markdown
 <span style="color: red;">This is red text</span>
-```
