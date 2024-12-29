@@ -6,7 +6,7 @@
 
 ### 1. Pen Controls
 
-### 1.1 PENUP
+#### 1.1 PENUP
 ```cpp
 PENUP
 ```
