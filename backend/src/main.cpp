@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
     const auto lines = file::txt_file_to_lines(argv[1]); 
     auto image = img::Image(std::stoul(argv[3]), std::stoul(argv[4]));
     auto turtle = turtle::Turtle(image.get_dimensions());
+    auto memory = std::unordered_map<std::string, std::string>();
 
     dbg::title("Logo File");
 
@@ -41,7 +42,7 @@ int main(int argc, char *argv[]) {
         auto ast = parser.parse();
         if (ast.is_ok()) {
             ast.unwrap().run_debug();
-            ast.unwrap().run(turtle, image);
+            ast.unwrap().run(turtle, image, memory);
             // save the image as png
             image.save_png(argv[2]);
         } else {

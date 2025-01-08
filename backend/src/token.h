@@ -20,7 +20,10 @@ namespace token {
         NUMBER,
         FILL,
         STRING,
-        INVALID,
+        XCOR,
+        YCOR,
+        HEADING,
+        INVALID
     };
 
     struct Token {

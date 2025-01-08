@@ -4,10 +4,10 @@ namespace ast {
     AST::AST(std::vector<std::unique_ptr<ast::ASTNode>> &&ast)
     : ast_(std::move(ast)) {}
 
-    auto AST::run(turtle::Turtle &turtle, img::Image &image) -> void {
+    auto AST::run(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) -> void {
         int count = 0;
         for (const auto &node : ast_) {
-            node->execute(turtle, image);
+            node->execute(turtle, image, memory);
         }
     }
 
@@ -20,8 +20,9 @@ namespace ast {
     }
 
     // PENUPNODE
-    void PenUpNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+    auto PenUpNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
         turtle.set_pen_up();
+        return std::monostate{};
     }
 
     void PenUpNode::debug() const {
@@ -31,8 +32,9 @@ namespace ast {
     }
 
     // PENDOWNNODE
-    void PenDownNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+    auto PenDownNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
         turtle.set_pen_down();
+        return std::monostate{};
     }
 
     void PenDownNode::debug() const {
@@ -45,8 +47,9 @@ namespace ast {
     ForwardNode::ForwardNode(int distance) 
     : distance_(distance) {}
 
-    void ForwardNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+    auto ForwardNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
         turtle.go_forward(distance_, image);
+        return std::monostate{};
     }
 
     void ForwardNode::debug() const {
@@ -59,8 +62,9 @@ namespace ast {
     BackNode::BackNode(int distance)
     : distance_(distance) {}
 
-    void BackNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+    auto BackNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
         turtle.go_back(distance_, image);
+        return std::monostate{};
     }
 
     void BackNode::debug() const {
@@ -74,8 +78,9 @@ namespace ast {
     LeftNode::LeftNode(int distance)
     : distance_(distance) {};
 
-    void LeftNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+    auto LeftNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
         turtle.go_left(distance_, image);
+        return std::monostate{};
     }
 
     void LeftNode::debug() const {
@@ -88,8 +93,9 @@ namespace ast {
     RightNode::RightNode(int distance)
     : distance_(distance) {}
 
-    void RightNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+    auto RightNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
         turtle.go_right(distance_, image);
+        return std::monostate{};
     }
 
     void RightNode::debug() const {
@@ -102,8 +108,9 @@ namespace ast {
     SetPenColorNode::SetPenColorNode(graphics::Colour &colour)
     : colour_(colour) {}
 
-    void SetPenColorNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+    auto SetPenColorNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
         turtle.set_pen_colour(colour_);
+        return std::monostate{};
     }
 
     void SetPenColorNode::debug() const {
@@ -116,8 +123,9 @@ namespace ast {
     TurnNode::TurnNode(int degrees) 
     : degrees_(degrees) {}
 
-    void TurnNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+    auto TurnNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
         turtle.turn(degrees_);
+        return std::monostate{};
     }
 
     void TurnNode::debug() const {
@@ -130,8 +138,9 @@ namespace ast {
     SetHeadingNode::SetHeadingNode(int degrees) 
     : degrees_(degrees) {}
 
-    void SetHeadingNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+    auto SetHeadingNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
         turtle.set_direction(degrees_);
+        return std::monostate{};
     }
 
     void SetHeadingNode::debug() const {
@@ -144,8 +153,9 @@ namespace ast {
     SetXNode::SetXNode(int x)
     : x_(x) {}
 
-    void SetXNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+    auto SetXNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
         turtle.set_x(x_);
+        return std::monostate{};
     }
 
     void SetXNode::debug() const {
@@ -158,8 +168,9 @@ namespace ast {
     SetYNode::SetYNode(int y)
     : y_(y) {}
 
-    void SetYNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+    auto SetYNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
         turtle.set_y(y_);
+        return std::monostate{};
     }
 
     void SetYNode::debug() const {
@@ -169,8 +180,9 @@ namespace ast {
     }
 
     // FILLNODE
-    void FillNode::execute(turtle::Turtle &turtle, img::Image &image) const {
+    auto FillNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
         turtle.fill(image);
+        return std::monostate{};
     }
 
     void FillNode::debug() const {
@@ -178,5 +190,67 @@ namespace ast {
         std::cout << "  FILL" << std::endl;
         std::cout << "}," << std::endl;
     }
+
+    // MAKENODE
+    MakeNode::MakeNode(std::unique_ptr<ASTNode> &&variable, std::unique_ptr<ASTNode> &&value)
+    : variable_(std::move(variable))
+    , value_(std::move(value)) {}
+
+    auto MakeNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
+        auto any_left = std::any(variable_->execute(turtle, image, memory));
+        auto any_right = std::any(value_->execute(turtle, image, memory));
+        auto left = std::optional<std::string>(std::nullopt);
+        auto right = std::optional<std::string>(std::nullopt);
+
+        try { // trying left
+            // Attempt to cast to int
+            auto intValue = std::any_cast<int>(any_left);
+            left = std::to_string(intValue);
+        } catch (const std::bad_any_cast&) {
+            // If casting to int fails, attempt to cast to string
+            try {
+                auto left = std::any_cast<std::string>(any_left);
+            } catch (const std::bad_any_cast&) {
+                // If both casts fail, throw an exception
+                throw std::runtime_error("Cannot cast std::any to either int or std::string"); // Need to figure out how to return logo error
+            }
+        }
+
+        try { // trying right
+            // Attempt to cast to int
+            auto intValue = std::any_cast<int>(any_right);
+            right = std::to_string(intValue);
+        } catch (const std::bad_any_cast&) {
+            // If casting to int fails, attempt to cast to string
+            try {
+                auto right = std::any_cast<std::string>(any_right);
+            } catch (const std::bad_any_cast&) {
+                // If both casts fail, throw an exception
+                throw std::runtime_error("Cannot cast std::any to either int or std::string"); // Need to figure out how to return logo error
+            }
+        }
+
+        if (left.has_value() and right.has_value()) {
+            memory[left.value()] = right.value();
+        }
+        
+        return std::monostate{};
+    }
+
+    auto MakeNode::debug() const -> void {
+        std::cout << "{" << std::endl;
+        std::cout << "  MAKE," << std::endl;
+        std::cout << "  LEFT:" << std::endl;
+        variable_->debug();
+        std::cout << "  RIGHT:" << std::endl;
+        value_->debug();
+        std::cout << "}," << std::endl;
+    }
+
+    // XCORNODE
+
+    // YCORNODE
+
+    // HEADING
 
 } // namespace ast

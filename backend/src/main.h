@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <unordered_map>
 #include <vector>
 #include "lodepng.h"
 #include "image.h"

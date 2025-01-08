@@ -57,6 +57,12 @@ namespace token {
                         tokens.push_back(token::Token(token::TokenType::SETPENCOLOR, word, row + 1, col + 1));
                     } else if (word == "FILL") {
                         tokens.push_back(token::Token(token::TokenType::FILL, word, row + 1, col + 1));
+                    } else if (word == "XCOR") {
+                        tokens.push_back(token::Token(token::TokenType::XCOR, word, row + 1, col + 1));
+                    } else if (word == "YCOR") {
+                        tokens.push_back(token::Token(token::TokenType::YCOR, word, row + 1, col + 1));
+                    } else if (word == "HEADING") {
+                        tokens.push_back(token::Token(token::TokenType::HEADING, word, row + 1, col + 1));
                     } else {
                         tokens.push_back(token::Token(token::TokenType::INVALID, word, row + 1, col + 1));
                     }
