@@ -31,11 +31,11 @@ namespace ast {
 
     class ForwardNode : public ASTNode {
      public:
-        ForwardNode(int distance);
+        ForwardNode(std::unique_ptr<ASTNode>&& distance);
         std::any execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const override;
         void debug() const override;
      private:
-        int distance_;
+        std::unique_ptr<ASTNode> distance_;
     };
 
     class BackNode : public ASTNode {
@@ -121,7 +121,7 @@ namespace ast {
 	 public:
 		MakeNode(std::unique_ptr<ASTNode> &&variable, std::unique_ptr<ASTNode> &&value);
 		std::any execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const override;
-        void debug() const override;
+      	void debug() const override;
 	 private:
 		std::unique_ptr<ASTNode> variable_;
 		std::unique_ptr<ASTNode> value_;
@@ -131,23 +131,41 @@ namespace ast {
 	 public:
 		XCorNode() = default;
 		std::any execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const override;
-        void debug() const override;
+      	void debug() const override;
 	};
 
 	class YCorNode : public ASTNode {
 	 public:
 	 	YCorNode() = default;
 		std::any execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const override;
-        void debug() const override;
+      	void debug() const override;
 	};
 
 	class HeadingNode : public ASTNode {
 		HeadingNode() = default;
 		std::any execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const override;
-        void debug() const override;
+     	void debug() const override;
 	}; 
-    
-    class AST {
+
+   	class StringNode : public ASTNode {
+     public:
+		StringNode(std::string value);
+		std::any execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const override;
+		void debug() const override;
+     private:
+      	std::string value_;
+   };
+
+   class VariableNode : public ASTNode {
+	 public:
+		VariableNode(std::string var);
+		std::any execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const override;
+		void debug() const override;
+	 private:
+		std::string variable_;
+   };
+   
+   	class AST {
      public:
         AST(std::vector<std::unique_ptr<ASTNode>> &&ast);
         auto run(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) -> void;

@@ -6,24 +6,26 @@
 
 namespace token {
     enum class TokenType {
-        PENUP,
-        PENDOWN,
-        FORWARD,
-        BACK,
-        LEFT,
-        RIGHT,
-        SETPENCOLOR,
-        TURN,
-        SETHEADING,
-        SETX,
-        SETY,
-        NUMBER,
-        FILL,
-        STRING,
-        XCOR,
-        YCOR,
-        HEADING,
-        INVALID
+        PENUP, // 0
+        PENDOWN, // 1
+        FORWARD, // 2
+        BACK, // 3
+        LEFT, // 4
+        RIGHT, // 5
+        SETPENCOLOR, // 6
+        TURN, // 7
+        SETHEADING, // 8
+        SETX, // 9
+        SETY, // 10
+        NUMBER, // 11
+        FILL, // 12
+        STRING, // 13
+        VARIABLE, // 14
+        XCOR, // 15
+        YCOR, // 16
+        HEADING, // 17
+        MAKE, // 18
+        INVALID // 19
     };
 
     struct Token {

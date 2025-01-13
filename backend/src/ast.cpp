@@ -44,17 +44,33 @@ namespace ast {
     }
 
     // FORWARDNODE
-    ForwardNode::ForwardNode(int distance) 
-    : distance_(distance) {}
+    ForwardNode::ForwardNode(std::unique_ptr<ASTNode> &&distance) 
+    : distance_(std::move(distance)) {}
 
     auto ForwardNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
-        turtle.go_forward(distance_, image);
+        auto val = distance_->execute(turtle, image, memory);
+        try {   // Attempt to cast to int
+            auto intValue = std::any_cast<int>(val);
+            turtle.go_forward(intValue, image);
+        } catch (const std::bad_any_cast&) {
+            // If casting to int fails, attempt to cast to string
+            try {
+                auto strValue = std::any_cast<std::string>(val);
+                auto intValue = std::stoi(strValue);
+                turtle.go_forward(intValue, image);
+            } catch (const std::bad_any_cast&) {
+                // If both casts fail, throw an exception
+                throw std::runtime_error("Cannot cast distance to an int"); // Need to figure out how to return logo error
+            }
+        }
         return std::monostate{};
     }
 
     void ForwardNode::debug() const {
         std::cout << "{" << std::endl;
-        std::cout << "  Forward(" << distance_ << ")" << std::endl;
+        std::cout << "  Forward(" << std::endl;
+        distance_->debug();
+        std::cout << ")" << std::endl;
         std::cout << "}," << std::endl;
     }
 
@@ -209,7 +225,7 @@ namespace ast {
         } catch (const std::bad_any_cast&) {
             // If casting to int fails, attempt to cast to string
             try {
-                auto left = std::any_cast<std::string>(any_left);
+                left = std::any_cast<std::string>(any_left);
             } catch (const std::bad_any_cast&) {
                 // If both casts fail, throw an exception
                 throw std::runtime_error("Cannot cast std::any to either int or std::string"); // Need to figure out how to return logo error
@@ -223,7 +239,7 @@ namespace ast {
         } catch (const std::bad_any_cast&) {
             // If casting to int fails, attempt to cast to string
             try {
-                auto right = std::any_cast<std::string>(any_right);
+                right = std::any_cast<std::string>(any_right);
             } catch (const std::bad_any_cast&) {
                 // If both casts fail, throw an exception
                 throw std::runtime_error("Cannot cast std::any to either int or std::string"); // Need to figure out how to return logo error
@@ -232,8 +248,10 @@ namespace ast {
 
         if (left.has_value() and right.has_value()) {
             memory[left.value()] = right.value();
+        } else {
+            throw std::runtime_error("Failed to add to memory.");
         }
-        
+
         return std::monostate{};
     }
 
@@ -251,6 +269,39 @@ namespace ast {
 
     // YCORNODE
 
-    // HEADING
+    // HEADINGNODE
+
+    // STRINGNODE
+    StringNode::StringNode(std::string value) 
+    : value_(value) {}
+
+    auto StringNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
+        return value_;
+    }
+
+    auto StringNode::debug() const -> void {
+        std::cout << "{" << std::endl;
+        std::cout << "  String: " << value_ << std::endl;
+        std::cout << "}" << std::endl;
+    }
+
+    // VARIABLE NODE
+    VariableNode::VariableNode(std::string var)
+    : variable_(var) {}
+
+    auto VariableNode::execute(turtle::Turtle &turtle, img::Image &image, std::unordered_map<std::string, std::string> &memory) const -> std::any {
+        try {
+            return memory.at(variable_);
+        } catch (const std::out_of_range& e) {
+            // if variable is uninitialised, throw exception
+            throw std::runtime_error("variable in memory is uninitialised."); // Need to figure out how to return logo error
+        }
+    }
+
+    auto VariableNode::debug() const -> void {
+        std::cout << "{" << std::endl;
+        std::cout << "  Variable: " << variable_ << std::endl;
+        std::cout << "}" << std::endl;
+    }
 
 } // namespace ast

@@ -32,6 +32,9 @@ namespace token {
                     } else {
                         tokens.push_back(token::Token(token::TokenType::STRING, var, row + 1, col + 1));
                     } // add more as we think about MAKE assignments. (e.g. string type for '\"' thats not a number)
+                } else if (word[0] == ':') {
+                    const auto var = lines_[row][col].substr(1);
+                    tokens.push_back(token::Token(token::TokenType::VARIABLE, var, row + 1, col + 1));
                 } else { // command
                     if (word == "PENUP") {
                         tokens.push_back(token::Token(token::TokenType::PENUP, word, row + 1, col + 1));
@@ -63,6 +66,8 @@ namespace token {
                         tokens.push_back(token::Token(token::TokenType::YCOR, word, row + 1, col + 1));
                     } else if (word == "HEADING") {
                         tokens.push_back(token::Token(token::TokenType::HEADING, word, row + 1, col + 1));
+                    } else if (word == "MAKE") {
+                        tokens.push_back(token::Token(token::TokenType::MAKE, word, row + 1, col + 1));
                     } else {
                         tokens.push_back(token::Token(token::TokenType::INVALID, word, row + 1, col + 1));
                     }

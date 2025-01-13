@@ -21,9 +21,12 @@ namespace parse {
                 ast.push_back(std::make_unique<ast::PenDownNode>());
                 i += 1;
             } else if (tokens_[i].type == token::TokenType::FORWARD) {
-                if (i + 1 < tokens_.size() and tokens_[i+1].type == token::TokenType::NUMBER) {
-                    ast.push_back(std::make_unique<ast::ForwardNode>(std::stoi(tokens_[i+1].word)));
-                    i += 2;
+                if (i + 1 < tokens_.size()) {
+                    if (tokens_[i+1].type == token::TokenType::NUMBER or tokens_[i+1].type == token::TokenType::STRING) {
+                        ast.push_back(std::make_unique<ast::ForwardNode>(std::make_unique<ast::StringNode>(tokens_[i+1].word)));
+                    } else if (tokens_[i+1].type == token::TokenType::VARIABLE) {
+                        ast.push_back(std::make_unique<ast::ForwardNode>(std::make_unique<ast::VariableNode>(tokens_[i+1].word)));
+                    }
                 } else {
                     if (i + 1 >= tokens_.size()) {
                         auto error = logo_error::LogoError(logo_error::ErrorType::TOO_FEW_ARGUMENTS, "Expected one integer argument in the form: \033[32mFORWARD \"<int>\033[0m", tokens_[i].line_number, tokens_[i].column_number);
@@ -36,6 +39,7 @@ namespace parse {
                         std::exit(1); // todo: Return LogoError!
                     }
                 }
+                i += 2;
             } else if (tokens_[i].type == token::TokenType::BACK) {
                 if (i + 1 < tokens_.size() and tokens_[i+1].type == token::TokenType::NUMBER) {
                     ast.push_back(std::make_unique<ast::BackNode>(std::stoi(tokens_[i+1].word)));
@@ -175,6 +179,39 @@ namespace parse {
             } else if (tokens_[i].type == token::TokenType::FILL) {
                 ast.push_back(std::make_unique<ast::FillNode>());
                 i += 1;
+            } else if (tokens_[i].type == token::TokenType::MAKE) {
+                if (i + 2 >= tokens_.size()) {
+                    auto error = logo_error::LogoError(logo_error::ErrorType::TOO_FEW_ARGUMENTS, "Expected two argument in the form: \033[32mMAKE <arg 1> <arg 2>\033[0m", tokens_[i].line_number, tokens_[i].column_number);
+                    return result::Result<ast::AST, logo_error::LogoError>::Err(error);
+                } else {
+                    auto var = std::optional<std::unique_ptr<ast::ASTNode>>();
+                    auto val = std::optional<std::unique_ptr<ast::ASTNode>>();
+
+                    // get variable
+                    if (tokens_[i+1].type == token::TokenType::NUMBER or tokens_[i+1].type == token::TokenType::STRING) {
+                        var = std::make_unique<ast::StringNode>(tokens_[i+1].word);
+                    } else if (tokens_[i+1].type == token::TokenType::VARIABLE) {
+                        var = std::make_unique<ast::VariableNode>(tokens_[i+1].word);
+                    }
+                    // get value
+                    if (tokens_[i+2].type == token::TokenType::NUMBER or tokens_[i+2].type == token::TokenType::STRING) {
+                        val = std::make_unique<ast::StringNode>(tokens_[i+2].word);
+                    } else if (tokens_[i+2].type == token::TokenType::VARIABLE) {
+                        val = std::make_unique<ast::VariableNode>(tokens_[i+2].word);
+                    }
+                    // make the ast node
+
+                    if (var.has_value() and val.has_value()) {
+                        ast.push_back(std::make_unique<ast::MakeNode>(std::move(var.value()), std::move(val.value())));
+                    } else if (!var.has_value()) {
+                        auto error = logo_error::LogoError(logo_error::ErrorType::UNEXPECTED_TYPE, "<arg 1> must be of type variable, string, number or query: \033[32mMAKE <arg 1> <arg 2>\033[0m", tokens_[i].line_number, tokens_[i+1].column_number);
+                        return result::Result<ast::AST, logo_error::LogoError>::Err(error);
+                    } else {
+                        auto error = logo_error::LogoError(logo_error::ErrorType::UNEXPECTED_TYPE, "<arg 2> must be of type variable, string, number or query: \033[32mMAKE <arg 1> <arg 2>\033[0m", tokens_[i].line_number, tokens_[i+2].column_number);
+                        return result::Result<ast::AST, logo_error::LogoError>::Err(error);
+                    }              
+                }
+                i += 3;
             } else {
                 auto error = logo_error::LogoError(logo_error::ErrorType::UNEXPECTED_COMMAND, "Expected a command in the form: \033[32m<command> <args>\033[0m", tokens_[i].line_number, tokens_[i].column_number);
                 return result::Result<ast::AST, logo_error::LogoError>::Err(error);
